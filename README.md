@@ -28,4 +28,6 @@ This project demonstrates practical knowledge of API integration, DOM manipulati
 
 
 Output:
-
+<img width="1919" height="1015" alt="Image" src="https://github.com/user-attachments/assets/ecc8298f-6d12-4567-bb51-29bb3c110524" />
+<img width="1919" height="1021" alt="Image" src="https://github.com/user-attachments/assets/8d885b3d-cee2-4ad5-9f1d-fad0e2613189" />
+<img width="1908" height="1079" alt="Image" src="https://github.com/user-attachments/assets/3ee12fc6-cd49-475e-b9a4-673741557a88" />
