@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Weather App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      .search-box {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1); /* glass/transparent effect */
+        border-radius: 50px; /* fully rounded edges */
+        padding: 5px 10px;
+        border: 2px solid rgba(255, 255, 255, 0.3); /* optional border */
+        overflow: hidden;
+        width: 300px; /* adjust as needed */
+      }
+
+      .search-box input {
+        flex: 1;
+        border: none;
+        outline: none;
+        background: transparent;
+        padding: 10px 15px;
+        font-size: 16px;
+        color: #000000; /* text color */
+      }
+
+      .search-box button {
+        background: rgba(0, 0, 0, 0.2);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .search-box button:hover {
+        background: rgba(15, 14, 14, 0.4);
+      }
+
+      .search-box button i {
+        font-size: 18px;
+        color: #fff; /* icon color */
+      }
+
+      body {
+        background-image: url("https://i.pinimg.com/1200x/72/4c/5c/724c5c646e2f685a527f1ca93524701c.jpg");
+        background-size: cover; /* fills entire screen */
+        background-position: center; /* keeps image centered */
+        background-repeat: no-repeat; /* prevents tiling */
+        min-height: 100vh; /* full viewport height */
+        margin: 0; /* removes default spacing */
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.35); /* transparent */
+        backdrop-filter: blur(10px); /* blur background */
+        -webkit-backdrop-filter: blur(10px); /* Safari support */
+        border: 1px solid rgba(255, 255, 255, 0.4);
+
+        .glass-nav .navbar-brand,
+        .glass-nav .nav-link {
+          color: #1f2937 !important; /* Dark text for readability */
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-nav .search-box {
+          background: rgba(255, 255, 255, 0.9) !important;
+          backdrop-filter: blur(10px);
+        }
+        .glass-footer {
+          margin-top: auto;
+          backdrop-filter: blur(15px);
+          border-radius: 20px 20px 0 0;
+          box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-footer a {
+          color: #1f2937 !important;
+        }
+        .glass-footer a:hover {
+          color: #0d6efd !important;
+        }
+
+        .today-temp-card {
+          background: #ffffff;
+          border-radius: 16px;
+          padding: 20px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+          max-width: 500px;
+          margin: 40px auto;
+        }
+
+        .today-temp-card h5 {
+          font-weight: 600;
+          margin-bottom: 15px;
+          color: #333;
+        }
+        .glass-search {
+          display: flex;
+          align-items: center;
+
+          width: 420px;
+          height: 48px;
+
+          border-radius: 999px;
+          border: 2px solid rgba(0, 0, 0, 0.35);
+
+          background: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+
+          padding-left: 16px;
+        }
+
+        .glass-search input {
+          flex: 1;
+          border: none;
+          outline: none;
+          background: transparent;
+
+          font-size: 15px;
+          color: #000;
+        }
+
+        .glass-search input::placeholder {
+          color: rgba(0, 0, 0, 0.55);
+        }
+
+        .glass-search button {
+          width: 42px;
+          height: 42px;
+
+          margin-right: 4px;
+          border-radius: 50%;
+          border: none;
+
+          background: rgba(0, 0, 0, 0.75);
+          color: white;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          cursor: pointer;
+        }
+
+        .glass-search button i {
+          font-size: 18px;
+        }
+
+        .glass-search button:hover {
+          background: rgba(0, 0, 0, 0.9);
+        }
+      }
+    </style>
+  </head>
+  <body class="page-bg">
+    <nav
+      class="navbar navbar-expand-lg py-3 glass-nav"
+      style="
+        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.25);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      "
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">🌤 Weather App</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="common_cities.html">Common Cities</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="aqi_info.html">AQI Info</a>
+            </li>
+          </ul>
+          <form class="d-flex align-items-center" role="search">
+            <div class="search-box glass-search">
+              <input
+                id="city"
+                type="search"
+                placeholder="Search city..."
+                aria-label="Search"
+              />
+              <button type="submit" id="submit">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="today-temp-card">
+      <canvas id="todayTempChart" height="60"></canvas>
+    </div>
+
+    <div
+      class="glass-banner my-4 mx-auto p-3 rounded-3 shadow"
+      style="
+        max-width: 600px;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+      "
+    >
+      <h1 class="text-center mb-0">Weather For <span id="cityname"></span></h1>
+    </div>
+
+    <div class="container mt-5">
+      <main>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Temperature</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  <span id="temp"></span>
+                  <small class="text-body-secondary fw-light"
+                    ><span>&#8451;</span></small
+                  >
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <!-- <li>Temperature: <span id="temp"></span></li> -->
+                  <li>Temperature</li>
+                  <br />
+                  <li></li>
+                  <li>Min Temperature: <span id="min_temp"></span></li>
+                  <li>Max Temperature: <span id="max_temp"></span></li>
+                </ul>
+                <!-- <button
+                  type="button"
+                  class="w-100 btn btn-lg btn-outline-primary"
+                >
+                  Sign up for free
+                </button> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Current Weather</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  <span id="humidity"></span>
+                  <small class="text-body-secondary fw-light">%</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Humidity</li>
+                  <br />
+                  <li></li>
+                  <!-- <li>Humidity: <span id="humidity"></span></li> -->
+                  <li>Condition: <span id="condition"></span></li>
+                  <!-- <li>Wind speed: <span id="wind_speed"></span></li> -->
+                  <li>Wind direction: <span id="wind_direction"></span></li>
+                </ul>
+                <!-- <button type="button" class="w-100 btn btn-lg btn-primary">
+                  Get started
+                </button> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm">
+              <div class="card-header py-3">
+                <h4 class="my-0 fw-normal">Sun & Wind</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  <span id="wind_speed"></span>
+                  <small class="text-body-secondary fw-light">km/h</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                  <li>Wind Speed</li>
+                  <br />
+                  <li>Sunrise: <span id="sunrise"></span></li>
+                  <li>Sunset: <span id="sunset"></span></li>
+                  <!-- <li>Wind direction: <span id="wind_direction"></span></li> -->
+                </ul>
+                <!-- <button type="button" class="w-100 btn btn-lg btn-primary">
+                  Contact us
+                </button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="today-temp-card">
+      <canvas id="todayTempChart" height="150"></canvas>
+    </div>
+
+    <footer
+      class="glass-footer mt-5 pt-4 pb-3 text-center"
+      style="
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+      "
+    >
+      <div class="container">
+        <p class="mb-2 small fw-light">
+          &copy; 2026 Weather App. Built with ❤️
+        </p>
+        <div class="row g-2">
+          <div class="col-md-4 mb-2">
+            <h6 class="fw-bold text-primary small mb-1">Weather Links</h6>
+            <ul class="list-unstyled small mb-0">
+              <li>
+                <a
+                  href="https://openweathermap.org"
+                  class="text-decoration-none text-muted"
+                  target="_blank"
+                  >OpenWeather</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://open-meteo.com"
+                  class="text-decoration-none text-muted"
+                  target="_blank"
+                  >Open-Meteo</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://weather.com"
+                  class="text-decoration-none text-muted"
+                  target="_blank"
+                  >Weather.com</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4 mb-2">
+            <h6 class="fw-bold text-primary small mb-1">News</h6>
+            <p class="small text-muted mb-0">IMD Weather Updates</p>
+          </div>
+          <div class="col-md-4 mb-2">
+            <h6 class="fw-bold text-primary small mb-1">API Credits</h6>
+            <p class="small text-muted mb-0">Open-Meteo Free API</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>

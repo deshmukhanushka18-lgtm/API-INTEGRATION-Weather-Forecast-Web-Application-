@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AQI Information</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      .glass-nav .navbar-brand,
+      .glass-nav .nav-link {
+        color: #1f2937 !important; /* Dark text for readability */
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .glass-nav .search-box {
+        background: rgba(255, 255, 255, 0.9) !important;
+        backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <!-- navbar.html -->
+    <nav
+  class="navbar navbar-expand-lg py-3 glass-nav"
+  style="
+    backdrop-filter: blur(20px);
+    background: rgba(200, 200, 200, 0.6);
+    border-bottom: 1px solid rgba(150, 150, 150, 0.4);
+  "
+>
+
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">🌤 Weather App</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="common_cities.html">Common Cities</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="aqi_info.html">AQI Info</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Heading -->
+    <div class="container my-4">
+      <h1 class="text-center mb-3">Air Quality Index (AQI)</h1>
+      <p class="text-center text-muted">
+        Understand air pollution levels and their impact on health
+      </p>
+    </div>
+
+    <!-- What is AQI -->
+    <div class="container mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title">What is AQI?</h4>
+          <p class="card-text">
+            The <strong>Air Quality Index (AQI)</strong> is a numerical scale
+            used to measure how polluted the air is and how it affects human
+            health. A higher AQI value indicates poorer air quality and greater
+            health risks.
+          </p>
+          <p>AQI is calculated based on pollutants such as:</p>
+          <ul>
+            <li>PM2.5 (Fine particulate matter)</li>
+            <li>PM10 (Coarse particulate matter)</li>
+            <li>Carbon Monoxide (CO)</li>
+            <li>Nitrogen Dioxide (NO₂)</li>
+            <li>Sulphur Dioxide (SO₂)</li>
+            <li>Ozone (O₃)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- AQI Scale Table -->
+    <div class="container mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title">AQI Scale</h4>
+
+          <div class="table-responsive">
+            <table class="table table-bordered text-center align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>AQI Range</th>
+                  <th>Category</th>
+                  <th>Health Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-success">
+                  <td>0 – 50</td>
+                  <td>Good</td>
+                  <td>Air quality is satisfactory</td>
+                </tr>
+                <tr class="table-warning">
+                  <td>51 – 100</td>
+                  <td>Satisfactory</td>
+                  <td>Minor breathing discomfort</td>
+                </tr>
+                <tr class="table-orange">
+                  <td>101 – 200</td>
+                  <td>Moderate</td>
+                  <td>Discomfort for sensitive people</td>
+                </tr>
+                <tr class="table-danger">
+                  <td>201 – 300</td>
+                  <td>Poor</td>
+                  <td>Breathing discomfort for all</td>
+                </tr>
+                <tr class="table-secondary">
+                  <td>301 – 400</td>
+                  <td>Very Poor</td>
+                  <td>Respiratory illness on exposure</td>
+                </tr>
+                <tr class="table-dark">
+                  <td>401 – 500</td>
+                  <td>Severe</td>
+                  <td>Serious health effects</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why AQI is Important -->
+    <div class="container mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h4 class="card-title">Why AQI is Important?</h4>
+          <ul>
+            <li>Helps people plan outdoor activities safely</li>
+            <li>Protects children, elderly, and asthma patients</li>
+            <li>Raises awareness about pollution levels</li>
+            <li>Supports environmental monitoring</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Future Integration -->
+    <div class="container mb-5">
+      <div class="card shadow-sm border-primary">
+        <div class="card-body">
+          <h4 class="card-title text-primary">Future Scope</h4>
+          <p>
+            In future versions, this Weather App can integrate real-time AQI
+            data using air pollution APIs and display:
+          </p>
+          <ul>
+            <li>Live AQI values for searched cities</li>
+            <li>Health recommendations based on AQI</li>
+            <li>Charts showing pollutant concentration</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-3 bg-body-tertiary">
+      <p class="mb-0">&copy; 2025 Weather App | AQI Information Page</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
